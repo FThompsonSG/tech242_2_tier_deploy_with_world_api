@@ -56,11 +56,15 @@ sudo service mysql start
 sudo systemctl enable mysql
 
 # download world.sql from repo
+rm world.sql
 wget https://raw.githubusercontent.com/FThompsonSG/world_api_app_code/main/world.sql
 
 # run world.app
-mysql -u root -p < world.sql
+mysql -u root -proot < world.sql
 
 # configure MySQL to accept any connections with root username and root password
 sudo sed -i 's/^bind-address\s*=\s*127\.0\.0\.1/bind-address = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
 sudo service mysql restart
+
+# create root user and grant privileges
+sudo mysql -u root -proot -e "CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY 'root'; GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;"
