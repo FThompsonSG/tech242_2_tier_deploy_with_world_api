@@ -43,7 +43,7 @@ java -version
 echo "Java installation confirmed"
 echo ""
 
-# update password install MySQL
+# update password and install MySQL
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
 sudo apt-get update -y
@@ -66,5 +66,5 @@ mysql -u root -proot < world.sql
 sudo sed -i 's/^bind-address\s*=\s*127\.0\.0\.1/bind-address = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
 sudo service mysql restart
 
-# create root user and grant privileges
+# create root user and grant privileges if one does not already exist
 sudo mysql -u root -proot -e "CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY 'root'; GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;"

@@ -94,11 +94,11 @@ echo ""
 echo "Repository cloned."
 echo ""
 
-# cd into correct directory
+# cd into correct directory NB. Include in user data from this line when launching instance from AMI
 cd repo/WorldProject
 
 # assign environment variables
-export DB_HOST=jdbc:mysql://172.31.58.244:3306/world
+export DB_HOST=jdbc:mysql://DB_IP:3306/world
 export DB_USER=root
 export DB_PASS=root
 
@@ -106,7 +106,7 @@ export DB_PASS=root
 echo "Running app..."
 echo ""
 
-output=$(mysql -h 172.31.58.244 -u root -proot -e "USE world; SELECT 1" 2>&1)
+output=$(mysql -h DB_IP -u root -proot -e "USE world; SELECT 1" 2>&1)
 
 if [ $? -eq 0 ]; then
     echo "Connected Successfully"
