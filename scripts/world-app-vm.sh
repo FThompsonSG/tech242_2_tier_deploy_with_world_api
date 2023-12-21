@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# update and upgrade VM
 cd
 echo ""
 echo "Updating..."
@@ -97,12 +98,12 @@ echo ""
 # cd into correct directory NB. Include in user data from this line when launching instance from AMI
 cd repo/WorldProject
 
-# assign environment variables
+# assign environment variables NB. Ensure you replace DB_IP with the IP of the database VM
 export DB_HOST=jdbc:mysql://DB_IP:3306/world
 export DB_USER=root
 export DB_PASS=root
 
-# check connection successful before running the application
+# check connection successful before running the application NB. Ensure you replace DB_IP with the IP of the database VM
 echo "Running app..."
 echo ""
 
